@@ -11,23 +11,22 @@
 int Socket(int domain, int type, int protocol){
         int res = socket(domain, type, protocol);//socket discriptor - ipv_4, TCP
         if(res == -1){
-        perror("cannot create socket!\n");
-        exit(EXIT_FAILURE);
+       		perror("cannot create socket!\n");
+        	exit(EXIT_FAILURE);
         }
 
         return res;
 }
 void Connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen){
 	int res = connect(sockfd, addr, addrlen);
-    if (res == -1) {
-        perror("connect failed");
-        exit(EXIT_FAILURE);
+    	if (res == -1) {
+       		perror("connect failed");
+        	exit(EXIT_FAILURE);
     }
 }
 
 
-timer_t vytvorCasovac(int signal)
-{
+timer_t vytvorCasovac(int signal){
   struct sigevent kam;
   kam.sigev_notify=SIGEV_SIGNAL;
   kam.sigev_signo=signal;
@@ -61,20 +60,20 @@ int main(){
 
 	 
 	 write (fd, "HELLO\n", 6);
-	char buf[256];
-    ssize_t nread;
-    nread = read(fd, buf, 256);
-    if (nread == -1) {
-        perror("read failed");
-        exit(EXIT_FAILURE);
-    }				
-    if (nread == 0) {
-        printf("EOF occured\n");
-    }
-    write(STDOUT_FILENO, buf, nread);
+	 char buf[256];
+    	 ssize_t nread;
+   	 nread = read(fd, buf, 256);
+    	 if (nread == -1) {
+        	perror("read failed");
+        	exit(EXIT_FAILURE);
+   	 }				
+   	 if (nread == 0) {
+        	printf("EOF occured\n");
+   	 }
+   	 write(STDOUT_FILENO, buf, nread);
 
-  timer_t casovac;
-  casovac=vytvorCasovac(SIGKILL);
+ 	timer_t casovac;
+ 	casovac=vytvorCasovac(SIGKILL);
 
 
 	
@@ -90,14 +89,14 @@ int main(){
 	       sleep(10);
 
 	}	       
-    send(fd, &gains, sizeof(gains), 0);
+    	send(fd, &gains, sizeof(gains), 0);
 
 
 							/*
 							 * 2 client
 							 */
-sleep(3);
-   int fd2 = Socket(AF_INET, SOCK_STREAM, 0);
+	sleep(3);
+   	int fd2 = Socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in adr2 = {0};
 
 
@@ -123,8 +122,8 @@ sleep(3);
 							 /*
                                                          * 3 client
                                                          */
-sleep(3);
-   int fd3 = Socket(AF_INET, SOCK_STREAM, 0);
+	sleep(3);
+  	 int fd3 = Socket(AF_INET, SOCK_STREAM, 0);
         struct sockaddr_in adr3 = {0};
 
 
@@ -176,10 +175,10 @@ sleep(3);
 
 
     	sleep(3);
-    close(fd);
-    close(fd2);
-     close(fd3);
+    	close(fd);
+    	close(fd2);
+    	close(fd3);
 	close(fd4);
-//	close(fd5);
+
 	return 0;
 }
