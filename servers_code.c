@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <semaphore.h>
+#include <semaphore.h> 
 int Socket(int domain, int type, int protocol){
 	  int res = socket(domain, type, protocol);
 	  if(res == -1){
